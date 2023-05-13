@@ -1,0 +1,5 @@
+flask==2.2.2
+flask_sqlalchemy==2.5.1
+flask_wtf==1.1.1
+sqlalchemy==1.4.7
+wtforms==3.0.1
