@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+  <!-- Контент -->
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Укорачиватель ссылок</h1>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Исходная ссылка</th>
+        <th scope="col">Короткая ссылка</th>
+        <th scope="col">Дата создания</th>
+        <th scope="col">Количество переходов</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for url in urls %}
+      <tr>
+        <th scope="row">{{ url.id }}</th>
+        <td>
+            <a href="{{ url.link }}">
+              {{ url.link | truncate(25) }}
+            </a>
+        </td>
+        <td>
+          <a href="{{ url_for('short_redirect', short=url.short, _external=True) }}">
+            {{ url_for('short_redirect', short=url.short, _external=True) }}
+          </a>
+        </td>
+        <td>
+          {{ url.created_at.strftime('%d.%m.%Y %H:%M:%S') }}
+      </td>
+      <td>
+        {{ url.visits }}
+      </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <!-- Скрипты Bootstrap 5 -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+          crossorigin="anonymous"></script>
+  {% endblock content %}
+</body>
+</html>
